@@ -48,6 +48,16 @@ const SideNavigation = (props) => {
                                     </a>
                                 </Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to="/view/single/bird">
+                                    <a href="#" className="nav-link">
+                                        <i className="nav-icon fas fa-th"></i>
+                                        <p>
+                                            View Single Bird
+                                        </p>
+                                    </a>
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
                 </div>

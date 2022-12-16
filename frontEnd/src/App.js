@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CreateTodo from "./components/create-todo.component";
 import CreateBird from "./components/bird/CreateBird";
 import AllBirds from "./components/bird/AllBirds";
+import ViewSingleBird from "./components/bird/ViewSingleBird";
 import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
 import cssFilesLoader from "./CssFilesLoader"
@@ -36,6 +37,7 @@ class App extends Component {
                 {/* <Route path="/edit/:id" element={<EditTodo />} /> */}
                 <Route path="/birds/create" element={<CreateBird />} />
                 <Route path="/birds" element={<AllBirds />} />
+                <Route path="/view/single/bird" element={<ViewSingleBird/>} />
               </Routes>
             </div>
           </div>

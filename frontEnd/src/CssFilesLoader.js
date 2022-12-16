@@ -10,6 +10,7 @@ import "./customcss/select2-bootstrap4-theme/select2-bootstrap4.min.css";
 import "./customcss/select2/css/select2.min.css";
 import "./customcss/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css";
 import "./customcss/my.css";
+import "./dist/css/adminlte.min.css";
 
 const cssFilesLoader =()=>{
     return(<></>);

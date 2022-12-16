@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import MiddleWrapper from './../layout/MiddleWrapper'; 
-// import "./create.css";
+import "./create.css";
 const CreateBird = () => {
     const fatherDetails = [
         { label: 'Blue Opline/ZBF162216', value: 'Blue Opline/ZBF162216' },
@@ -93,7 +93,6 @@ const CreateBird = () => {
     const onChangePurchaserContactNumber = (e) => {
         setPurchaserContactNumber(e.target.value);
     }
-
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(`Form submitted:`);
@@ -141,7 +140,7 @@ const CreateBird = () => {
 
         axios.post('http://localhost:4000/bird/add', newBird)
             .then(res => console.log(res.data));
-        setBirdName('');
+        //setBirdName('');
         setRingNumber('');
         setGender('');
         setAge('');
@@ -172,8 +171,8 @@ const CreateBird = () => {
                             <form>
                                 <div className="row">
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="exampleInputEmail1">Bird Name</label>
-                                        <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter Bird Name" />
+                                        <label >Bird Name</label>
+                                        <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Bird Name"/>
                                     </div>
                                     <div className="form-group col-md-6">
                                         <label htmlFor="exampleInputPassword1">Record Number</label>
@@ -204,21 +203,72 @@ const CreateBird = () => {
                                             <option>Paired</option>
                                         </select>
                                     </div>
-
                                     <div className="form-group col-sm-6">
                                         <label htmlFor="exampleInputEmail1">Origin</label>
-
                                         <div className="form-check farmbreed">
-                                            <input className="farmbreed" type="radio" name="radio1" />
+                                            <input className="farmbreed" 
+                                                    type="radio" 
+                                                    name="priorityOptions" 
+                                                    id="FarmBreed" 
+                                                    value="FarmBreed"
+                                                    checked={farmBreed===true} 
+                                                    onChange={onChangeFarmPurchased}/>
                                             <label className="form-check-label">Farm Breed</label>
-                                            <input className="purchased" type="radio" name="radio1" />
+                                            <input className="purchased" 
+                                                   type="radio" 
+                                                   name="priorityOptions" 
+                                                   id="PurchasedFromMarket" 
+                                                   value="Purchased" 
+                                                   checked={purchased===true} 
+                                                   onChange={onChangeFarmPurchased}/>
                                             <label className="form-check-label">Purchased</label>
                                         </div>
+                                       
                                     </div>
+                                    <div className="form-group col-md-6">
+                                        </div>
+                                    <div className="form-group col-md-6">
+                                            <label >Purcased Bird Record Number</label>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Bird Record Name"/>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label >Purchased Rate </label>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Rate"/>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label >Purchased Date </label>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Date"/>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label >Purchased Contact Number </label>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Contact Number"/>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label >Purchased Details </label>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Details"/>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                        <label>Father Details</label>
+                                        <select className="form-control select2" style={{ "width": "100%" }}>
+                                            <option >Blue Opline</option>
+                                            <option>Green Opline</option>
+                                        </select>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label>Mother Details</label>
+                                            <select className="form-control select2" style={{ "width": "100%" }}>
+                                                <option >Green Opline</option>
+                                                <option>Red Opline</option>
+                                            </select>
+                                        </div>
+                                        <div className="form-group col-md-6">
+                                            <label >Hatch Date: </label>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Hatch Date"/>
+                                        </div>
                                 </div>
-                                <div className="row submit_buttonDiv">
-                                    <button type="submit" className="submit_button">Submit</button>
-                                </div>
+                                    <div className="row">
+                                        <button type="submit" className="btn btn-success submit_button">Submit</button>
+                                    </div>
                             </form>
                         </div>
                     </div>
