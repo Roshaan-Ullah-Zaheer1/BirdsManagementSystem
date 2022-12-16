@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Bird = new Schema({
+let bird = new Schema({
     name: {
         type: String
     },
@@ -28,4 +28,4 @@ let Bird = new Schema({
     }
 });
 
-module.exports = mongoose.model('Bird', Bird);
+module.exports = mongoose.model('bird', bird);

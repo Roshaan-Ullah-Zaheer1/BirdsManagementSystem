@@ -1,39 +1,45 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route,Routes,Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CreateTodo from "./components/create-todo.component";
-import CreateBird from "./components/create.component";
+import CreateBird from "./components/bird/CreateBird";
+import AllBirds from "./components/bird/AllBirds";
 import EditTodo from "./components/edit-todo.component";
 import TodosList from "./components/todos-list.component";
+import cssFilesLoader from "./CssFilesLoader"
 import logo from "./logo.png";
+import "./App.css";
+import Navigation from "./components/layout/Navigation";
+import Dashboard from "./components/dashboard/Dashboard";
+
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.state = {toggle: false};
+  }
+
+  handleToggle(){
+    this.setState({toggle: !this.state.toggle});
+  }
+
+
   render() {
     return (
       <Router>
-        <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="https://codingthesmartway.com" target="_blank">
-              <img src={logo} width="30" height="30" alt="CodingTheSmartWay.com" />
-            </a>
-            <Link to="/" className="navbar-brand">Zaba Birds Farm</Link>
-            <div className="collpase nav-collapse">
-              <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                  <Link to="/" className="nav-link">Todos</Link>
-                </li>
-                <li className="navbar-item">
-                  <Link to="/bird/create" className="nav-link">Add Bird</Link>
-                </li>
-              </ul>
+        <cssFilesLoader>
+        <div className={this.state.toggle === true ? 'hold-transition sidebar-mini sidebar-collapse' :
+        'hold-transition sidebar-mini'}>
+            <div className="wrapper">
+              <Navigation toggleHandler={this.handleToggle}/>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                {/* <Route path="/edit/:id" element={<EditTodo />} /> */}
+                <Route path="/birds/create" element={<CreateBird />} />
+                <Route path="/birds" element={<AllBirds />} />
+              </Routes>
             </div>
-          </nav>
-          <Routes>
-          <Route path="/" element={<TodosList/>} />
-          <Route path="/edit/:id" element={<EditTodo/>} />
-          <Route path="/create" element={<CreateTodo/>} />
-          <Route path="/bird/create" element={<CreateBird/>} />
-          </Routes>
-        </div>
+          </div>
+        </cssFilesLoader>
       </Router>
     );
   }

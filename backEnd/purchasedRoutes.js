@@ -3,10 +3,10 @@ const express = require('express');
 const app = express();
 const purchasedRoutes = express.Router();
 
-let purchased = require('./purchased.model');
+let purchasedModel = require('./purchased.model');
 
 purchasedRoutes.route('/').get(function(req, res) {
-    purchased.find(function(err, purchased) {
+    purchasedModel.find(function(err, purchased) {
         if (err) {
             console.log(err);
         } else {
@@ -17,13 +17,13 @@ purchasedRoutes.route('/').get(function(req, res) {
 
 purchasedRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
-    purchased.findById(id, function(err, purchased) {
+    purchasedModel.findById(id, function(err, purchased) {
         res.json(purchased);
     });
 });
 
 purchasedRoutes.route('/update/:id').post(function(req, res) {
-    purchased.findById(req.params.id, function(err, purchased) {
+    purchasedModel.findById(req.params.id, function(err, purchased) {
         if (!purchased)
             res.status(404).send("data is not found");
         else
@@ -44,7 +44,7 @@ purchasedRoutes.route('/update/:id').post(function(req, res) {
 });
 
 purchasedRoutes.route('/add').post(function(req, res) {
-    let purchased = new purchased(req.body);
+    let purchased = new purchasedModel(req.body);
     purchased.save()
         .then(purchased => {
             res.status(200).json({'purchased': 'purchased bird added successfully'});

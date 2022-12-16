@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Farmbreed = new Schema({
+let farmbreed = new Schema({
     fatherId: {
         type: Number
     },
@@ -13,4 +13,4 @@ let Farmbreed = new Schema({
     }
 });
 
-module.exports = mongoose.model('Farmbreed', Farmbreed);
+module.exports = mongoose.model('farmbreed', farmbreed);

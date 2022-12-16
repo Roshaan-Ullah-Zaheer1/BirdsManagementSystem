@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const birdRoutes = express.Router();
 
-let bird = require('./bird.model');
+let birdModel = require('./bird.model');
 
 birdRoutes.route('/').get(function(req, res) {
-    bird.find(function(err, bird) {
+    birdModel.find(function(err, bird) {
         if (err) {
             console.log(err);
         } else {
@@ -16,13 +16,13 @@ birdRoutes.route('/').get(function(req, res) {
 
 birdRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
-    bird.findById(id, function(err, bird) {
+    birdModel.findById(id, function(err, bird) {
         res.json(bird);
     });
 });
 
 birdRoutes.route('/update/:id').post(function(req, res) {
-    bird.findById(req.params.id, function(err, bird) {
+    birdModel.findById(req.params.id, function(err, bird) {
         if (!bird)
             res.status(404).send("data is not found");
         else
@@ -45,7 +45,7 @@ birdRoutes.route('/update/:id').post(function(req, res) {
 });
 
 birdRoutes.route('/add').post(function(req, res) {
-    let bird = new bird(req.body);
+    let bird = new birdModel(req.body);
     bird.save()
         .then(bird => {
             res.status(200).json({'bird': 'bird added successfully'});

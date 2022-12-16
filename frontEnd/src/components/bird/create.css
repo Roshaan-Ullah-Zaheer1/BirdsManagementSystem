@@ -1,0 +1,24 @@
+.checking{
+    width: 249px;
+  margin-top:10px;
+  height: 35px;
+  border: 1px solid #2e323c;
+  border-radius: 4px;
+  background-color: transparent;
+}
+.navbar{
+  color:green;
+}
+input.newsletterinput
+{
+  width: 249px;
+  margin-top:10px;
+  height: 35px;
+  border: 1px solid #2e323c;
+  border-radius: 4px;
+  background-color: transparent;
+}
+input.newsletterinput:hover
+{
+  border-color: dodgerblue;
+}

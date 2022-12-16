@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Purchased = new Schema({
+let purchased = new Schema({
     purchasedId: {
         type: Number
     },
@@ -22,4 +22,4 @@ let Purchased = new Schema({
     }
 });
 
-module.exports = mongoose.model('Purchased', Purchased);
+module.exports = mongoose.model('purchased', purchased);
