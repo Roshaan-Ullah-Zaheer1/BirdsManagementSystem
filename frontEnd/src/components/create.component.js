@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 import axios from 'axios'; 
 import { Dropdown, Select } from 'bootstrap';
 
-const CreateBird=()=>{
+const CreateBird=() =>{
     const [birdName, setBirdName] = useState('');
     const [ringNumber, setRingNumber] = useState('');
     const [gender, setGender] = useState('');
