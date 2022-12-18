@@ -1,0 +1,6 @@
+.cageRows{
+    display:flex;
+}
+.cageRows div{
+    width: 20%;
+}

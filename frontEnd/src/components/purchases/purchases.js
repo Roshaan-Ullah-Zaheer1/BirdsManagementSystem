@@ -1,7 +1,7 @@
 import MiddleWrapper from "../layout/MiddleWrapper";
 import { Link } from 'react-router-dom';
-import "./AllBirds.css";
-const AllBirds = () => {
+import "./purchases.css";
+const PurchaseBirds = () => {
     return (<MiddleWrapper heading={""}>
         <section className="content">
             <div className="container-fluid">
@@ -9,7 +9,7 @@ const AllBirds = () => {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-header">
-                                <h3 className="card-title">All Birds Record</h3>
+                                <h3 className="card-title">Purchase Birds Record</h3>
 
                                 <div className="customTools">
                                     <div className="card-tools">
@@ -24,7 +24,7 @@ const AllBirds = () => {
                                         </div>
 
                                     </div>
-                                    <Link to="/birds/create">
+                                    <Link to="/purchases/add">
                                         <button type="submit" className="btn btn-outline-dark btn-sm AddButton">Add Bird</button>
                                     </Link>
                                 </div>
@@ -33,11 +33,10 @@ const AllBirds = () => {
                                 <table className="table table-head-fixed text-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Record Number</th>
+                                            <th>Bird ID Number</th>
                                             <th>Bird Name</th>
                                             <th>Ring Number</th>
-                                            <th>Age</th>
-                                            <th>Gender</th>
+                                            <th>Purchase Amount</th>
                                             <th>Details</th>
                                         </tr>
                                     </thead>
@@ -46,15 +45,14 @@ const AllBirds = () => {
                                             <td>183</td>
                                             <td>Green Opline</td>
                                             <td>ZBF162216</td>
-                                            <td>5 Months</td>
-                                            <td>DNA Male</td>
+                                            <td>Rs.450000</td>
                                             <td>
                                                 <div className="customActions">
-                                                    <Link to="/birds/edit">
+                                                    <Link to="/purchases/edit">
                                                         <div><i className="fas fa-edit customEdit"></i></div>
                                                     </Link>
                                                     <div><i className="fas fa-trash customDel"></i></div>
-                                                    <Link to="/birds/view">
+                                                    <Link to="/purchases/view">
                                                         <div><i class='fas fa-book customView'></i></div>
                                                     </Link>
                                                 </div>
@@ -64,15 +62,14 @@ const AllBirds = () => {
                                             <td>109</td>
                                             <td>Palefellow Opline</td>
                                             <td>ZBF162255</td>
-                                            <td>1 Months</td>
-                                            <td>Unknown</td>
+                                            <td>Rs.12000</td>
                                             <td>
                                                 <div className="customActions">
-                                                    <Link to="/birds/edit">
+                                                    <Link to="/sold/edit">
                                                         <div><i className="fas fa-edit customEdit"></i></div>
                                                     </Link>
                                                     <div><i className="fas fa-trash customDel"></i></div>
-                                                    <Link to="/birds/view">
+                                                    <Link to="/sold/view">
                                                         <div><i class='fas fa-book customView'></i></div>
                                                     </Link>
                                                 </div>
@@ -82,15 +79,48 @@ const AllBirds = () => {
                                             <td>154</td>
                                             <td>Blue Opline</td>
                                             <td>ZBF162221</td>
-                                            <td>10 Months</td>
-                                            <td>DNA Female</td>
+                                            <td>Rs.70000</td>
                                             <td>
                                                 <div className="customActions">
-                                                    <Link to="/birds/edit">
+                                                    <Link to="/purchases/edit">
                                                         <div><i className="fas fa-edit customEdit"></i></div>
                                                     </Link>
                                                     <div><i className="fas fa-trash customDel"></i></div>
-                                                    <Link to="/birds/view">
+                                                    <Link to="/purchases/view">
+                                                        <div><i class='fas fa-book customView'></i></div>
+                                                    </Link>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>123</td>
+                                            <td>Pink Opline</td>
+                                            <td>ZBF162222</td>
+                                            <td>Rs.1210000</td>
+                                            <td>
+                                                <div className="customActions">
+                                                    <Link to="/purchases/edit">
+                                                        <div><i className="fas fa-edit customEdit"></i></div>
+                                                    </Link>
+                                                    <div><i className="fas fa-trash customDel"></i></div>
+                                                    <Link to="/purchases/view">
+                                                        <div><i class='fas fa-book customView'></i></div>
+                                                    </Link>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>111</td>
+                                            <td>Green Opline</td>
+                                            <td>ZBF162223</td>
+                                            <td>Rs.20000</td>
+                                            <td>
+                                                <div className="customActions">
+                                                    <Link to="/purchases/edit">
+                                                        <div><i className="fas fa-edit customEdit"></i></div>
+                                                    </Link>
+                                                    <div><i className="fas fa-trash customDel"></i></div>
+                                                    <Link to="/purchases/view">
                                                         <div><i class='fas fa-book customView'></i></div>
                                                     </Link>
                                                 </div>
@@ -107,4 +137,4 @@ const AllBirds = () => {
     </MiddleWrapper>);
 }
 
-export default AllBirds;
+export default PurchaseBirds;

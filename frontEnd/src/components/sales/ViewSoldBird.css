@@ -1,0 +1,25 @@
+.details{
+    font-weight: bold;
+}
+.details1{
+    font-size:medium;
+}
+.header1{
+    margin-left: 73px;
+}
+.header2{
+    margin-left: 502px;
+}
+.header3{
+    margin-left: 866px;
+}
+.customCard{
+    padding:22px;
+}
+.heading{
+    font-size: 21px;
+    margin-bottom: 10px;;
+    font-weight: 500;
+    text-align: center;
+    color: black;
+}

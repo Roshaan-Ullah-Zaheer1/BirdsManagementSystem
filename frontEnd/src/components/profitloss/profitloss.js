@@ -1,7 +1,7 @@
 import MiddleWrapper from "../layout/MiddleWrapper";
 import { Link } from 'react-router-dom';
-import "./AllBirds.css";
-const AllBirds = () => {
+import "./profitloss.css";
+const ProfitLoss = () => {
     return (<MiddleWrapper heading={""}>
         <section className="content">
             <div className="container-fluid">
@@ -9,25 +9,9 @@ const AllBirds = () => {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-header">
-                                <h3 className="card-title">All Birds Record</h3>
+                                <h3 className="card-title">Profit/Loss Statements</h3>
 
-                                <div className="customTools">
-                                    <div className="card-tools">
-                                        <div className="input-group input-group-sm" style={{ "width": "150px;" }}>
-                                            <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
-
-                                            <div className="input-group-append">
-                                                <button type="submit" className="btn btn-default">
-                                                    <i className="fas fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <Link to="/birds/create">
-                                        <button type="submit" className="btn btn-outline-dark btn-sm AddButton">Add Bird</button>
-                                    </Link>
-                                </div>
+                                
                             </div>
                             <div className="card-body table-responsive p-0 center" style={{ "height": "300px;" }}>
                                 <table className="table table-head-fixed text-nowrap">
@@ -107,4 +91,4 @@ const AllBirds = () => {
     </MiddleWrapper>);
 }
 
-export default AllBirds;
+export default ProfitLoss;

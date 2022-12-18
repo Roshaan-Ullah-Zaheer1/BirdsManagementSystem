@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import MiddleWrapper from './../layout/MiddleWrapper'; 
+import MiddleWrapper from '../layout/MiddleWrapper'; 
 import "./create.css";
-const CreateBird = () => {
+const EditBird = () => {
     const fatherDetails = [
         { label: 'Blue Opline/ZBF162216', value: 'Blue Opline/ZBF162216' },
         { label: 'Green Opline/ZBF162221', value: 'Green Opline/ZBF162221' },
@@ -39,7 +39,6 @@ const CreateBird = () => {
     const [purchaserContactNumber, setPurchaserContactNumber] = useState('');
 
     const onChangeBirdName = (e) => {
-        console.log(e.target.value);
         setBirdName(e.target.value);
     }
     const onChangeRingNumber = (e) => {
@@ -230,23 +229,23 @@ const CreateBird = () => {
                                         </div>
                                     <div className="form-group col-md-6">
                                             <label >Purcased Bird Record Number</label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Bird Record Name"/>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Bird Record Name"/>
                                         </div>
                                         <div className="form-group col-md-6">
                                             <label >Purchased Rate </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Rate"/>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Rate"/>
                                         </div>
                                         <div className="form-group col-md-6">
                                             <label >Purchased Date </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Date"/>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Date"/>
                                         </div>
                                         <div className="form-group col-md-6">
                                             <label >Purchased Contact Number </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Contact Number"/>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Contact Number"/>
                                         </div>
                                         <div className="form-group col-md-6">
                                             <label >Purchased Details </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Details"/>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Details"/>
                                         </div>
                                         <div className="form-group col-md-6">
                                         <label>Father Details</label>
@@ -264,7 +263,7 @@ const CreateBird = () => {
                                         </div>
                                         <div className="form-group col-md-6">
                                             <label >Hatch Date: </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Hatch Date"/>
+                                            <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Hatch Date"/>
                                         </div>
                                 </div>
                                     <div className="row">
@@ -279,7 +278,7 @@ const CreateBird = () => {
     );
 }
 
-export default CreateBird;
+export default EditBird;
 
 
 

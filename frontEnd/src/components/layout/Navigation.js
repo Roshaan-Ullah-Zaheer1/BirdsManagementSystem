@@ -1,3 +1,4 @@
+
 import mainLogo from './../../dist/img/AdminLTELogo.png';
 import {Link} from 'react-router-dom';
 import { useState } from 'react';
@@ -11,9 +12,15 @@ const SideNavigation = (props) => {
     return (
         <>
             <nav className="main-header navbar navbar-expand navbar-white navbar-light">
-                <ul className="navbar-nav">
+                <ul className="navbar-nav customNav">
                     <li className="nav-item" onClick={handleToggle}>
                         <div className="nav-link" data-widget="pushmenu" role="button"><i className="fas fa-bars"></i></div>
+                    </li>
+                    <li className="nav-item logoutButton">
+                        <div>
+                            <button className="btn btn-block btn-secondary">Logout <i className='fas fa-sign-out-alt'></i></button>
+
+                        </div>
                     </li>
                 </ul>
             </nav>
@@ -33,27 +40,68 @@ const SideNavigation = (props) => {
                                     <a href="#" className="nav-link">
                                         <i className="nav-icon fas fa-th"></i>
                                         <p>
-                                            All Birds
+                                            Birds
                                         </p>
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/birds/create">
+                                <Link to="/pairs">
                                     <a href="#" className="nav-link">
                                         <i className="nav-icon fas fa-th"></i>
                                         <p>
-                                            Add Bird
+                                            Pairs
                                         </p>
                                     </a>
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/view/single/bird">
+                                <Link to="/cages">
                                     <a href="#" className="nav-link">
                                         <i className="nav-icon fas fa-th"></i>
                                         <p>
-                                            View Single Bird
+                                            Cage Wise Birds
+                                        </p>
+                                    </a>
+                                </Link>
+                            </li>
+                            <hr/>
+                            <li className="nav-item">
+                                <Link to="/sales">
+                                    <a href="#" className="nav-link">
+                                        <i className="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Sold Birds
+                                        </p>
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/purchases">
+                                    <a href="#" className="nav-link">
+                                        <i className="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Purchase Birds
+                                        </p>
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/profitloss">
+                                    <a href="#" className="nav-link">
+                                        <i className="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Profit Loss 
+                                        </p>
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/chicks">
+                                    <a href="#" className="nav-link">
+                                        <i className="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Chicks Pedigree
                                         </p>
                                     </a>
                                 </Link>

@@ -7,3 +7,34 @@
   .detail_button{
     width: 100px;
   }
+  .AddButton{
+    margin-left: 8px;
+    background-color: #28a745;
+    color:white;
+    border: none;
+  }
+  .customEdit{
+    color:#28a745;
+  }
+  .customDel{
+    margin-left: 10px;
+    color:red
+  }
+  .customView{
+    margin-left: 10px;
+    color:#007bff;
+  }
+  .customActions{
+    display:flex;
+    justify-content:center;
+  }
+  .customSpan{
+    margin: auto;
+}
+.logoutButton{
+  margin-left:auto !important;
+  margin-top:5px;
+}
+.customNav{
+  width:100%;
+}

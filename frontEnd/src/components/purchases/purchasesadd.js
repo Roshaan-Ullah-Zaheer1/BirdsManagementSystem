@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import MiddleWrapper from './../layout/MiddleWrapper'; 
-import "./create.css";
-const CreateBird = () => {
+const PurchaseBirdAdd = () => {
     const fatherDetails = [
         { label: 'Blue Opline/ZBF162216', value: 'Blue Opline/ZBF162216' },
         { label: 'Green Opline/ZBF162221', value: 'Green Opline/ZBF162221' },
@@ -39,7 +38,6 @@ const CreateBird = () => {
     const [purchaserContactNumber, setPurchaserContactNumber] = useState('');
 
     const onChangeBirdName = (e) => {
-        console.log(e.target.value);
         setBirdName(e.target.value);
     }
     const onChangeRingNumber = (e) => {
@@ -164,7 +162,7 @@ const CreateBird = () => {
         setHatchDate('');
     }
     return (
-        <MiddleWrapper heading={"Add a bird"}>
+        <MiddleWrapper heading={"Add Purchase bird"}>
             <section className="content">
                 <div className="container-fluid">
                     <div className="card card-default">
@@ -172,17 +170,21 @@ const CreateBird = () => {
                             <form>
                                 <div className="row">
                                     <div className="form-group col-md-6">
-                                        <label >Bird Name</label>
-                                        <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Bird Name"/>
-                                    </div>
-                                    <div className="form-group col-md-6">
-                                        <label htmlFor="exampleInputPassword1">Record Number</label>
+                                        <label htmlFor="exampleInputPassword1">Purchase Bird Date</label>
                                         <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Record Number " />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="exampleInputPassword1">Ring Number</label>
+                                        <label htmlFor="exampleInputPassword1">Bird Name</label>
                                         <input type="password" className="form-control" id="exampleInputPasswor2" placeholder="Record Number" />
                                     </div>
+                                    <div className="form-group col-md-6">
+                                        <label htmlFor="exampleInputPassword1">Bird ID Number</label>
+                                        <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <label htmlFor="exampleInputPassword1">Ring Number</label>
+                                        <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
+                                    </div>    
                                     <div className="form-group col-md-6">
                                         <label>Gender</label>
                                         <select className="form-control select2" style={{ "width": "100%" }}>
@@ -192,80 +194,27 @@ const CreateBird = () => {
                                             <option>Expected Male</option>
                                             <option>Expected Female</option>
                                         </select>
-                                    </div>
+                                    </div>                                
                                     <div className="form-group col-md-6">
                                         <label htmlFor="exampleInputPassword1">Age</label>
                                         <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
-                                    </div>
+                                    </div>    
                                     <div className="form-group col-md-6">
-                                        <label>Pairing Status</label>
-                                        <select className="form-control select2" style={{ "width": "100%" }}>
-                                            <option >Not Paired</option>
-                                            <option>Paired</option>
-                                        </select>
-                                    </div>
-                                    <div className="form-group col-sm-6">
-                                        <label htmlFor="exampleInputEmail1">Origin</label>
-                                        <div className="form-check farmbreed">
-                                            <input className="farmbreed" 
-                                                    type="radio" 
-                                                    name="priorityOptions" 
-                                                    id="FarmBreed" 
-                                                    value="FarmBreed"
-                                                    checked={farmBreed===true} 
-                                                    onChange={onChangeFarmPurchased}/>
-                                            <label className="form-check-label">Farm Breed</label>
-                                            <input className="purchased" 
-                                                   type="radio" 
-                                                   name="priorityOptions" 
-                                                   id="PurchasedFromMarket" 
-                                                   value="Purchased" 
-                                                   checked={purchased===true} 
-                                                   onChange={onChangeFarmPurchased}/>
-                                            <label className="form-check-label">Purchased</label>
-                                        </div>
-                                       
-                                    </div>
+                                        <label htmlFor="exampleInputPassword1">Purcahse Price</label>
+                                        <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
+                                    </div>    
                                     <div className="form-group col-md-6">
-                                        </div>
+                                        <label htmlFor="exampleInputPassword1">Seller Name</label>
+                                        <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
+                                    </div>    
                                     <div className="form-group col-md-6">
-                                            <label >Purcased Bird Record Number</label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Bird Record Name"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Rate </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Rate"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Date </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Date"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Contact Number </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Contact Number"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Details </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Details"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                        <label>Father Details</label>
-                                        <select className="form-control select2" style={{ "width": "100%" }}>
-                                            <option >Blue Opline</option>
-                                            <option>Green Opline</option>
-                                        </select>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label>Mother Details</label>
-                                            <select className="form-control select2" style={{ "width": "100%" }}>
-                                                <option >Green Opline</option>
-                                                <option>Red Opline</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Hatch Date: </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Hatch Date"/>
-                                        </div>
+                                        <label htmlFor="exampleInputPassword1">Seller Phone Number</label>
+                                        <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
+                                    </div>    
+                                    <div className="form-group col-md-6">
+                                        <label htmlFor="exampleInputPassword1">Seller Details</label>
+                                        <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
+                                    </div>    
                                 </div>
                                     <div className="row">
                                         <button type="submit" className="btn btn-success submit_button">Submit</button>
@@ -279,7 +228,7 @@ const CreateBird = () => {
     );
 }
 
-export default CreateBird;
+export default PurchaseBirdAdd;
 
 
 

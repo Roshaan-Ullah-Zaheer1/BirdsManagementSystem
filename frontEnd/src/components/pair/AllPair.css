@@ -1,0 +1,28 @@
+.detail_button{
+    margin: auto; 
+}
+.tableHeading{
+    border-bottom: 1px solid grey;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 42px;
+}
+.tableRow{
+    border-bottom: 0.5px solid #d6d6d6;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+    line-height: 28px;
+}
+.centerAlign{
+    text-align: center;
+}
+.customActions1{
+    display:flex;
+    justify-content:center;
+    margin-top: -27px;
+  }
+.customSpan1{
+    margin-top: -14px;
+}

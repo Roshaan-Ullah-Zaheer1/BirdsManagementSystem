@@ -4,8 +4,18 @@
 }
 .center{
     text-align: center;
+    
 }
 .customTools{
     float:right;
     display: flex;
+}
+.head{
+    margin-top:5px !important;
+}
+.del{
+    margin-left:15px
+}
+.view{
+    margin-right:16px;
 }

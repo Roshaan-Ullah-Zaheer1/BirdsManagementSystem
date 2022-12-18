@@ -8,6 +8,18 @@ let Sale = new Schema({
     birdId: {
         type: Number
     },
+    recordNumber: {
+        type: Number
+    },
+    ringNumber: {
+        type: Number
+    },
+    gender: {
+        type: Number
+    },
+    age: {
+        type: Number
+    },
     soldDate: {
         type: String
     },
