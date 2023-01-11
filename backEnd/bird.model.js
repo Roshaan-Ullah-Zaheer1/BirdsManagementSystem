@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let bird = new Schema({
+    birdId: {
+        type: Number
+    },
+    serialNumber:{
+        type:Number
+    },
     name: {
         type: String
     },
@@ -17,14 +23,11 @@ let bird = new Schema({
     cageNumber: {
         type: Number
     },
-    isPurchased: {
-        type: Boolean
-    },
-    isFarmBreed: {
-        type: Boolean
-    },
     isPaired: {
         type: Boolean
+    },
+    birdSource: {
+        type: String
     }
 });
 

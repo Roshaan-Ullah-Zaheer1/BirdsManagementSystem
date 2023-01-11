@@ -1,0 +1,7 @@
+.abc{
+    min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;
+}
+.dashboardCards{
+    padding:30px;
+    color:white !important;
+}

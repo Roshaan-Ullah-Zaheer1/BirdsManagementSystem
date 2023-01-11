@@ -1,18 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import MiddleWrapper from './../layout/MiddleWrapper'; 
+import MiddleWrapper from './../layout/MiddleWrapper';
 import "./create.css";
 const CreateBird = () => {
-    const fatherDetails = [
-        { label: 'Blue Opline/ZBF162216', value: 'Blue Opline/ZBF162216' },
-        { label: 'Green Opline/ZBF162221', value: 'Green Opline/ZBF162221' },
-        { label: 'Slatty Opline/ZBF162256', value: 'Slatty Opline/ZBF162256' },
-    ];
-    const motherDetails = [
-        { label: 'Blue Opline/ZBF162216', value: 'Blue Opline/ZBF162216' },
-        { label: 'Green Opline/ZBF162221', value: 'Green Opline/ZBF162221' },
-        { label: 'Slatty Opline/ZBF162256', value: 'Slatty Opline/ZBF162256' },
-    ];
     const genderOptions = [
         { label: 'Unknown', value: 'Unknown' },
         { label: 'DNA Male', value: 'DNA Male' },
@@ -20,256 +10,190 @@ const CreateBird = () => {
         { label: 'Expected Male', value: 'Expected Male' },
         { label: 'Expected Female', value: 'Expected Female' }
     ];
-    const [farmBreedFather, setFarmBreedFather] = useState('');
-    const [farmBreedMother, setFarmBreedMother] = useState('');
+
+    const [birdIdNumber, setBirdIdNumber] = useState(0);
+    const [birdSource, setBirdSource] = useState('Market');
     const [birdName, setBirdName] = useState('');
     const [ringNumber, setRingNumber] = useState('');
     const [age, setAge] = useState('');
-    const [gender, setGender] = useState(genderOptions[0]);
+    const [gender, setGender] = useState('Unknown');
     const [cageNumber, setCageNumber] = useState('');
-    const [farmBreed, setFarmBreed] = useState(false);
-    const [purchased, setPurchased] = useState(false);
     const [isPaired, setIsPaired] = useState(false);
-    const [hatchDate, setHatchDate] = useState('');
-    const [purchasedId, setPurchasedId] = useState('');
-    const [purchasedRate, setPurchasedRate] = useState('');
-    const [purchasedDate, setPurchasedDate] = useState('');
-    const [purchasedDetails, setPurchasedDetails] = useState('');
-    const [purchaserName, setPurchaserName] = useState('');
-    const [purchaserContactNumber, setPurchaserContactNumber] = useState('');
+    const [isFarmBreed, setIsFarmBreed] = useState(false);
 
-    const onChangeBirdName = (e) => {
-        console.log(e.target.value);
-        setBirdName(e.target.value);
+    const [maleBirds, setMaleBirds] = useState(null);
+    const [femaleBirds, setFemaleBirds] = useState(null);
+
+    const [farmBreedFather, setFarmBreedFather] = useState('');
+    const [farmBreedMother, setFarmBreedMother] = useState('');
+    const [hatchDate, setHatchDate] = useState('');
+
+    const clearForm = () => {
+        setBirdIdNumber(0);
+        setBirdSource('Market');
+        setBirdName('');
+        setRingNumber('');
+        setGender('');
+        setAge('');
+        setCageNumber('');
+        setIsPaired(false);
+        setIsFarmBreed(false);
+        setMaleBirds(null);
+        setFemaleBirds(null);
+        setFarmBreedFather('');
+        setFarmBreedMother('');
+        setHatchDate('');
     }
-    const onChangeRingNumber = (e) => {
-        setRingNumber(e.target.value);
-    }
-    const onGenderChange = (e) => {
-        setGender(e.value);
-    }
-    const onChangeAge = (e) => {
-        setAge(e.target.value);
-    }
-    const onChangeCageNumber = (e) => {
-        setCageNumber(e.target.value);
-    }
-    const onChangeIsPaired = (e) => {
-        setIsPaired(!isPaired);
-    }
-    const onChangeFarmPurchased = (e) => {
-        if (e.target.value === "FarmBreed") {
-            setFarmBreed(true);
-            setPurchased(false);
+    useEffect(() => {
+        axios.get("http://localhost:4000/bird/getByGender/Male")
+            .then(res => {
+                let data = res.data;
+                let transformedData = data.map((item) => {
+                    return (<option value={item._id}>{item.serialNumber}</option>);
+                });
+                setMaleBirds(transformedData);
+                setFarmBreedFather(data[0]._id);
+            });
+        axios.get("http://localhost:4000/bird/getByGender/Female")
+            .then(res => {
+                let data = res.data;
+                let transformedData = data.map((item) => {
+                    return (<option value={item._id}>{item.serialNumber}</option>);
+                });
+                setFemaleBirds(transformedData);
+                setFarmBreedMother(data[0]._id);
+            });
+    }, [isFarmBreed, maleBirds,femaleBirds ]);
+
+
+    const onChangeBirdSource = (e) => {
+        setBirdSource(e.target.value);
+        if (e.target.value === "Market") {
+            setIsFarmBreed(false);
         }
-        else {
-            setFarmBreed(false);
-            setPurchased(true);
-        }
-    }
-    const onChangeFatherFarmBreed = (e) => {
-        setFarmBreedFather(e.value);
-    }
-    const onChangeMotherFarmBreed = (e) => {
-        setFarmBreedMother(e.value);
-    }
-    const onChangeHatchDate = (e) => {
-        setHatchDate(e.target.value);
-    }
-    const onChangePurchasedId = (e) => {
-        setPurchasedId(e.target.value);
-    }
-    const onChangePurchasedRate = (e) => {
-        setPurchasedRate(e.target.value);
-    }
-    const onChangePurchasedDate = (e) => {
-        setPurchasedDate(e.target.value);
-    }
-    const onChangePurchasedDetails = (e) => {
-        setPurchasedDetails(e.target.value);
-    }
-    const onChangePurchaserName = (e) => {
-        setPurchaserName(e.target.value);
-    }
-    const onChangePurchaserContactNumber = (e) => {
-        setPurchaserContactNumber(e.target.value);
+        else
+            setIsFarmBreed(true);
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(`Form submitted:`);
-        console.log(`Bird Name: ${birdName}`);
-        console.log(`Ring Number: ${ringNumber}`);
-        console.log(`Gender: ${gender}`);
-        console.log(`Age: ${age}`);
-        console.log(`Cage Number: ${cageNumber}`);
-        console.log(`Is Paired: ${isPaired}`);
-        console.log(`Is Purchased: ${purchased}`);
-        console.log(`Is FarmBreed: ${farmBreed}`);
-        console.log(`Father Details: ${farmBreedFather}`);
-        console.log(`Mother Details: ${farmBreedMother}`);
-        console.log(`Hatch Date: ${hatchDate}`);
-        console.log(`Purhcased Id: ${purchasedId}`);
-        console.log(`Purhcased Rate: ${purchasedRate}`);
-        console.log(`Purhcased Date: ${purchasedDate}`);
-        console.log(`Purhcased Details: ${purchasedDetails}`);
-        console.log(`Purhcaser Name: ${purchaserName}`);
-        console.log(`Purhcaser Contact No: ${purchaserContactNumber}`);
-
+        let id = "";
         const newBird = {
+            serialNumber: birdIdNumber,
             name: birdName,
             ringNumber: ringNumber,
             gender: gender,
             age: age,
             cageNumber: cageNumber,
-            isPurchased: purchased,
-            isFarmBreed: farmBreed,
             isPaired: isPaired,
+            birdSource: birdSource
         };
-        const newpurchasedBird = {
-            purchasedId: purchasedId,
-            purchasedRate: purchasedRate,
-            purchasedDate: purchasedDate,
-            purchasedDetails: purchasedDetails,
-            purchaserName: purchaserName,
-            purchaserContactNumber: purchaserContactNumber
-        };
-        const newfarmBreedBird = {
-            fatherId: farmBreedFather,
-            motherId: farmBreedMother,
-            hatchDate: hatchDate
-        };
-
         axios.post('http://localhost:4000/bird/add', newBird)
-            .then(res => console.log(res.data));
-        //setBirdName('');
-        setRingNumber('');
-        setGender('');
-        setAge('');
-        setCageNumber('');
-        setPurchased(false);
-        setFarmBreed(false);
-        setIsPaired(false);
-        axios.post('http://localhost:4000/purchased/add', newpurchasedBird)
-            .then(res => console.log(res.data));
-        setPurchasedId('');
-        setPurchasedRate('');
-        setPurchasedDate('');
-        setPurchasedDetails('');
-        setPurchaserName('');
-        setPurchaserContactNumber('');
-        axios.post('http://localhost:4000/farmbreed/add', newfarmBreedBird)
-            .then(res => console.log(res.data));
-        setFarmBreedFather('');
-        setFarmBreedMother('');
-        setHatchDate('');
+            .then((response) => { return response.data })
+            .then(body => {
+                if(birdSource == "Farm Breed"){
+                id = body.bird._id;
+                const newfarmBreedBird = {
+                    bird: id,
+                    fatherId: farmBreedFather,
+                    motherId: farmBreedMother,
+                    hatchDate: hatchDate
+                };
+                axios.post('http://localhost:4000/farmbreed/add', newfarmBreedBird)
+                    .then(res => {
+                        alert("Bird added successfully!");
+                        console.log(res.data);
+                        clearForm();
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }) 
+                }
+                else{
+                    alert("Bird added successfully!");
+                    clearForm();
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
+
     return (
         <MiddleWrapper heading={"Add a bird"}>
             <section className="content">
                 <div className="container-fluid">
                     <div className="card card-default">
                         <div className="card-body">
-                            <form>
+                            <form onSubmit={onSubmit}>
                                 <div className="row">
                                     <div className="form-group col-md-6">
+                                        <label >Bird ID Number</label>
+                                        <input type="number" min="0" value={birdIdNumber} onChange={(e) => { setBirdIdNumber(e.target.value) }} className="form-control" placeholder="ID Number" />
+                                    </div>
+
+                                    <div className="form-group col-md-6">
                                         <label >Bird Name</label>
-                                        <input type="text" onClick={onChangeBirdName} className="form-control" placeholder="Bird Name"/>
+                                        <input type="text" value={birdName} onChange={(e) => { setBirdName(e.target.value) }} className="form-control" placeholder="Bird Name" />
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="exampleInputPassword1">Record Number</label>
-                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Record Number " />
-                                    </div>
-                                    <div className="form-group col-md-6">
-                                        <label htmlFor="exampleInputPassword1">Ring Number</label>
-                                        <input type="password" className="form-control" id="exampleInputPasswor2" placeholder="Record Number" />
+                                        <label >Ring Number</label>
+                                        <input type="text" value={ringNumber} onChange={(e) => { setRingNumber(e.target.value) }} className="form-control" placeholder="Ring Number" />
                                     </div>
                                     <div className="form-group col-md-6">
                                         <label>Gender</label>
-                                        <select className="form-control select2" style={{ "width": "100%" }}>
-                                            <option >Unknown</option>
-                                            <option>DNA Male</option>
-                                            <option>DNA Female</option>
+                                        <select value={gender} onChange={(e) => { setGender(e.target.value) }} className="form-control select2" style={{ "width": "100%" }}>
+                                            <option>Non DNA</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
                                             <option>Expected Male</option>
                                             <option>Expected Female</option>
                                         </select>
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <label htmlFor="exampleInputPassword1">Age</label>
-                                        <input type="password" className="form-control" id="exampleInputPasswor2d1" placeholder="Record Number" />
+                                        <label >Age</label>
+                                        <input type="text" value={age} onChange={(e) => { setAge(e.target.value) }} className="form-control" placeholder="Age" />
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <label >Cage Number</label>
+                                        <input type="text" value={cageNumber} onChange={(e) => { setCageNumber(e.target.value) }} className="form-control" placeholder="Cage Number" />
                                     </div>
                                     <div className="form-group col-md-6">
                                         <label>Pairing Status</label>
-                                        <select className="form-control select2" style={{ "width": "100%" }}>
-                                            <option >Not Paired</option>
-                                            <option>Paired</option>
+                                        <select className="form-control select2" value={isPaired} onChange={(e) => { setIsPaired(!isPaired) }} style={{ "width": "100%" }}>
+                                            <option value={false} >Not Paired</option>
+                                            <option value={true}>Paired</option>
+                                        </select>
+                                    </div>   <div className="form-group col-md-6">
+                                        <label>Bird Source</label>
+                                        <select value={birdSource} onChange={onChangeBirdSource} className="form-control select2" style={{ "width": "100%" }}>
+                                            <option key="Market" value="Market">Market</option>
+                                            <option key="Farm Breed" value="Farm Breed">Farm Breed</option>
                                         </select>
                                     </div>
-                                    <div className="form-group col-sm-6">
-                                        <label htmlFor="exampleInputEmail1">Origin</label>
-                                        <div className="form-check farmbreed">
-                                            <input className="farmbreed" 
-                                                    type="radio" 
-                                                    name="priorityOptions" 
-                                                    id="FarmBreed" 
-                                                    value="FarmBreed"
-                                                    checked={farmBreed===true} 
-                                                    onChange={onChangeFarmPurchased}/>
-                                            <label className="form-check-label">Farm Breed</label>
-                                            <input className="purchased" 
-                                                   type="radio" 
-                                                   name="priorityOptions" 
-                                                   id="PurchasedFromMarket" 
-                                                   value="Purchased" 
-                                                   checked={purchased===true} 
-                                                   onChange={onChangeFarmPurchased}/>
-                                            <label className="form-check-label">Purchased</label>
-                                        </div>
-                                       
-                                    </div>
-                                    <div className="form-group col-md-6">
-                                        </div>
-                                    <div className="form-group col-md-6">
-                                            <label >Purcased Bird Record Number</label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Bird Record Name"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Rate </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Rate"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Date </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Date"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Contact Number </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Contact Number"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Purchased Details </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Details"/>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                        <label>Father Details</label>
-                                        <select className="form-control select2" style={{ "width": "100%" }}>
-                                            <option >Blue Opline</option>
-                                            <option>Green Opline</option>
-                                        </select>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label>Mother Details</label>
-                                            <select className="form-control select2" style={{ "width": "100%" }}>
-                                                <option >Green Opline</option>
-                                                <option>Red Opline</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group col-md-6">
-                                            <label >Hatch Date: </label>
-                                            <input type="text" onClick={onChangeMotherFarmBreed} className="form-control" placeholder="Hatch Date"/>
-                                        </div>
+                                    {isFarmBreed &&
+                                        <>
+                                            <div className="form-group col-md-6">
+                                                <label>Father Details</label>
+                                                <select className="form-control select2" onChange={(e) => { setFarmBreedFather(e.target.value);}} style={{ "width": "100%" }}>
+                                                    {maleBirds}
+                                                </select>
+                                            </div>
+                                            <div className="form-group col-md-6">
+                                                <label>Mother Details</label>
+                                                <select className="form-control select2" onChange={(e) => { setFarmBreedMother(e.target.value); }} style={{ "width": "100%" }}>
+                                                    {femaleBirds}
+                                                </select>
+                                            </div>
+                                            <div className="form-group col-md-6">
+                                                <label >Hatch Date: </label>
+                                                <input type="text" value={hatchDate} onChange={(e) => { setHatchDate(e.target.value) }} className="form-control" placeholder="Hatch Date" />
+                                            </div>
+                                        </>}
+                                    {!isFarmBreed && <div className="form-group col-md-12 marketMsg">After sumbitting this form please add purchase details of bird in purchase form!</div>}
                                 </div>
-                                    <div className="row">
-                                        <button type="submit" className="btn btn-success submit_button">Submit</button>
-                                    </div>
+                                <div className="row">
+                                    <button type="submit" className="btn btn-success submit_button">Submit</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -280,8 +204,3 @@ const CreateBird = () => {
 }
 
 export default CreateBird;
-
-
-
-
-

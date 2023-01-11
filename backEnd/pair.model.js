@@ -1,25 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Pair = new Schema({
-    pairId: {
-        type: Number
-    },
+let pair = new Schema({
     maleId: {
-        type: Number
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'bird'
     },
     femaleId: {
-        type: Number
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'bird'
     },
-   dateOfPairing: {
+    dateOfPairing: {
         type: String
-    },
-    pairNumber: {
-        type: Number
     },
     comments: {
         type: String
     }
 });
 
-module.exports = mongoose.model('Pair', Pair);
+module.exports = mongoose.model('pair', pair);

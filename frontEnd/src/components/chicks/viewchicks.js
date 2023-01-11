@@ -1,42 +1,121 @@
 import MiddleWrapper from "../layout/MiddleWrapper";
 import mainLogo from './../../dist/img/bird.jpeg';
 import "./viewchick.css";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 const ViewChick = () => {
+    const [birdData, setBirdData] = useState(null);
+    const [birdFather, setBirdFather] = useState(null);
+    const [birdMother, setBirdMother] = useState(null);
+
+    let { id } = useParams();
+    id = id.slice(1);
+
+    useEffect(() => {
+        axios.get('http://localhost:4000/bird/' + id)
+            .then((res) => {
+                let data = res.data;
+                let bird = (<div className="card-body box-profile">
+                    <div className="text-center">
+                        <img className="profile-user-img img-fluid img-circle"
+                            src={mainLogo}
+                            alt="User profile picture" />
+                    </div>
+                    <h3 className="profile-username text-center">{data.name}</h3>
+                    <ul className="list-group list-group-unbordered mb-3">
+                        <li className="list-group-item">
+                            <b>Bird ID Number</b> <a className="float-right">{data.serialNumber}</a>
+                        </li>
+                        <li className="list-group-item">
+                            <b>Bird Source</b> <a className="float-right">{data.birdSource}</a>
+                        </li>
+                        <li className="list-group-item">
+                            <b>Ring Number</b> <a className="float-right">{data.ringNumber}</a>
+                        </li>
+                        <li className="list-group-item">
+                            <b>Gender</b> <a className="float-right">{data.gender}</a>
+                        </li>
+                        <li className="list-group-item">
+                            <b>Age</b> <a className="float-right">{data.age}</a>
+                        </li>
+                        <li className="list-group-item">
+                            <b>Hatch Date</b> <a className="float-right">N/A</a>
+                        </li>
+
+                    </ul>
+                </div>);
+                setBirdData(bird);
+                if (data.birdSource == "Farm Breed") {
+                    axios.get('http://localhost:4000/farmbreed/getByBird/' + id)
+                        .then(res => {
+                            let farmBreedObj = res.data;
+                            axios.get('http://localhost:4000/bird/' + farmBreedObj.fatherId)
+                                .then((res) => {
+                                    let father = (<div className="user-block">
+                                        <span>
+                                            <p className="details">Name:</p>
+                                            <p className="details1">{res.data.name}</p>
+                                        </span>
+                                        <span>
+                                            <p className="details">Bird ID Number:</p>
+                                            <p className="details1">{res.data.serialNumber}</p>
+                                        </span>
+                                        <span>
+                                            <p className="details">Bird Source:</p>
+                                            <p className="details1">{res.data.birdSource}</p>
+                                        </span>
+                                        <span>
+                                            <p className="details">Ring Number:</p>
+                                            <p className="details1">{res.data.ringNumber}</p>
+                                        </span>
+                                    </div>);
+                                    setBirdFather(father);
+                                })
+                                .catch(err => {
+                                });
+                            axios.get('http://localhost:4000/bird/' + farmBreedObj.motherId)
+                                .then((res) => {
+                                    let mother = (<div className="user-block">
+                                        <span>
+                                            <p className="details">Name:</p>
+                                            <p className="details1">{res.data.name}</p>
+                                        </span>
+                                        <span>
+                                            <p className="details">Bird ID Number:</p>
+                                            <p className="details1">{res.data.serialNumber}</p>
+                                        </span>
+                                        <span>
+                                            <p className="details">Bird Source:</p>
+                                            <p className="details1">{res.data.birdSource}</p>
+                                        </span>
+                                        <span>
+                                            <p className="details">Ring Number:</p>
+                                            <p className="details1">{res.data.ringNumber}</p>
+                                        </span>
+                                    </div>);
+                                    setBirdMother(mother);
+                                })
+                                .catch(err => {
+                                    console.log(err);
+                                });
+                        })
+                        .catch(err => {
+                            console.log("error in getting data from farm breed");
+                        });
+                }
+            })
+            .catch(err => {
+                console.log("error in getting data from Purchased");
+            });
+    }, []);
     return (<MiddleWrapper >
         <section className="content">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
                         <div className="card card-primary card-outline">
-                            <div className="card-body box-profile">
-                                <div className="text-center">
-                                    <img className="profile-user-img img-fluid img-circle"
-                                        src={mainLogo}
-                                        alt="User profile picture" />
-                                </div>
-                                <h3 className="profile-username text-center">Green Opline</h3>
-                                <p className="text-muted text-center">Male</p>
-                                <ul className="list-group list-group-unbordered mb-3">
-                                    <li className="list-group-item">
-                                        <b>Bird ID Number</b> <a className="float-right">165</a>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <b>Bird Source</b> <a className="float-right">162223</a>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <b>Ring Number</b> <a className="float-right">Zbf162223</a>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <b>Gender</b> <a className="float-right">DNA Male</a>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <b>Age</b> <a className="float-right">5 Months</a>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <b>Hatch Date</b> <a className="float-right">12-04-2022</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            {birdData}
                         </div>
                     </div>
 
@@ -52,29 +131,7 @@ const ViewChick = () => {
                                                 <div className="post">
                                                 <div className="heading">Father</div>
                                                     <hr/>
-                                                    <div className="user-block">
-                                                        
-                                                        <span>
-                                                            <p className="details">Bird ID Number:</p>
-                                                            <p className="details1">162</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Bird Source:</p>
-                                                            <p className="details1">Market</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Bird Name:</p>
-                                                            <p className="details1">Red Eye</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Gender:</p>
-                                                            <p className="details1">DNA Male</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Age:</p>
-                                                            <p className="details1">16 Months</p>
-                                                        </span>
-                                                    </div>
+                                                    {birdFather}
                                                 </div>
                                             </div>
                                         </div>
@@ -89,28 +146,7 @@ const ViewChick = () => {
                                                 <div className="post">
                                                 <div className="heading">Mother</div>
                                                     <hr/>
-                                                    <div className="user-block">
-                                                    <span>
-                                                            <p className="details">Bird ID Number:</p>
-                                                            <p className="details1">223</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Bird Source:</p>
-                                                            <p className="details1">Market</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Bird Name:</p>
-                                                            <p className="details1">Black Eye</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Gender:</p>
-                                                            <p className="details1">DNA Female</p>
-                                                        </span>
-                                                        <span>
-                                                            <p className="details">Age:</p>
-                                                            <p className="details1">15 Months</p>
-                                                        </span>
-                                                    </div>
+                                                    {birdMother}
                                                 </div>
                                             </div>
                                         </div>

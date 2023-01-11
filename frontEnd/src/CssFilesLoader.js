@@ -11,6 +11,11 @@ import "./customcss/select2/css/select2.min.css";
 import "./customcss/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css";
 import "./customcss/my.css";
 import "./dist/css/adminlte.min.css";
+import "./customcss/summernote/summernote-bs4.min.css";
+import "./customcss/daterangepicker/daterangepicker.css";
+import "./customcss/overlayScrollbars/css/OverlayScrollbars.min.css";
+import "./customcss/jqvmap/jqvmap.min.css";
+
 
 const cssFilesLoader =()=>{
     return(<></>);

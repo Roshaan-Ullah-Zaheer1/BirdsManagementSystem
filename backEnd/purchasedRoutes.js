@@ -4,6 +4,7 @@ const app = express();
 const purchasedRoutes = express.Router();
 
 let purchasedModel = require('./purchased.model');
+var ObjectId = require('mongodb').ObjectID;
 
 purchasedRoutes.route('/').get(function(req, res) {
     purchasedModel.find(function(err, purchased) {
@@ -22,6 +23,27 @@ purchasedRoutes.route('/:id').get(function(req, res) {
     });
 });
 
+purchasedRoutes.route('/getByBird/:bird').get(function(req, res) {
+    let query = { bird: ObjectId(req.params.bird) };
+    purchasedModel.findOne(query, function(err, purchased) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(purchased);
+            res.json(purchased);
+        }
+    });
+});
+purchasedRoutes.route('/delete/:id').delete(function(req, res) {
+    let id = req.params.id;
+    purchasedModel.findByIdAndRemove(id, function(err, purchased) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(purchased);
+        }
+    });
+});
 purchasedRoutes.route('/update/:id').post(function(req, res) {
     purchasedModel.findById(req.params.id, function(err, purchased) {
         if (!purchased)

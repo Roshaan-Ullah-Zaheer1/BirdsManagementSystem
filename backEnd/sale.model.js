@@ -2,38 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Sale = new Schema({
-    id: {
-        type: Number
-    },
-    birdId: {
-        type: Number
-    },
-    recordNumber: {
-        type: Number
-    },
-    ringNumber: {
-        type: Number
-    },
-    gender: {
-        type: Number
-    },
-    age: {
-        type: Number
-    },
-    soldDate: {
+    soldDate:{
         type: String
     },
-    soldPrice: {
+    bird:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'bird'
+    },
+    Price: {
         type: Number
     },
-    clientName: {
+    purchaserName: {
         type: String
     },
-    clientDetails: {
+    purchaserPhoneNumber: {
         type: String
     },
-    clientPhoneNo: {
-        type: Number
+    purchaserDetails: {
+        type: String
     }
 });
 

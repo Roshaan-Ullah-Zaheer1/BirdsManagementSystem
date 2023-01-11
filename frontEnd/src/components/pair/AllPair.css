@@ -21,8 +21,13 @@
 .customActions1{
     display:flex;
     justify-content:center;
-    margin-top: -27px;
   }
 .customSpan1{
     margin-top: -14px;
+}
+.pairRows{
+    display:flex;
+}
+.pairRows div{
+    width: 25%;
 }

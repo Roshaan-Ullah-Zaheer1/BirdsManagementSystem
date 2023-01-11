@@ -1,7 +1,50 @@
 import MiddleWrapper from "../layout/MiddleWrapper";
 import { Link } from 'react-router-dom';
 import "./cage.css";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 const Cages = () => {
+
+    const [cagesWiseBirds, setCagesWiseBirds] = useState([]);
+
+    const getInnerRows = (data, cage) => {
+        return data.map((item) => {
+            if (item.cageNumber === cage) {
+                return (
+                    <div class="cageRows">
+                        <div>{item.name}</div>
+                        <div>{item.serialNumber}</div>
+                        <div>{item.birdSource}</div>
+                        <div>{item.ringNumber}</div>
+                        <div>{item.gender}</div>
+                    </div>
+                );
+            }
+        });
+    }
+    
+    useEffect(() => {
+        axios.get('http://localhost:4000/bird')
+            .then((res) => {
+                let data = res.data;
+                data = data.sort((p1, p2) => (p1.cageNumber > p2.cageNumber) ? 1 : (p1.cageNumber < p2.cageNumber) ? -1 : 0);
+                let cages = data.map(item => item.cageNumber).filter((value, index, self) => self.indexOf(value) === index);
+                let birdsList = cages.map((cage) => {
+                    return (<div className="row tableRow"> 
+                        <div className="col-md-2 customSpan">{cage}</div>
+                        <div className="col-md-10">
+                            {getInnerRows(data, cage)}
+                            <div />
+                        </div>
+                    </div>);
+                });
+                setCagesWiseBirds(birdsList);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, []);
+
     return (<MiddleWrapper heading={""}>
         <section className="content">
             <div className="container-fluid">
@@ -29,12 +72,13 @@ const Cages = () => {
                                 <div className="row tableHeading">
                                     <div className="col-md-2">Cage Number</div>
                                     <div className="col-md-2">Bird Name</div>
-                                    <div className="col-md-2">Record Number</div>
+                                    <div className="col-md-2">Bird Id Number</div>
+                                    <div className="col-md-2">Bird Source Number</div>
                                     <div className="col-md-2">Ring Number</div>
                                     <div className="col-md-2">Gender</div>
-                                    <div className="col-md-2">Age</div>
                                 </div>
-                                <div className="row tableRow">
+                                {cagesWiseBirds}
+                                {/* <div className="row tableRow">
                                     <div className="col-md-2 customSpan">1</div>
                                     <div className="col-md-10">
                                         <div class="cageRows">
@@ -42,21 +86,21 @@ const Cages = () => {
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div />
                                     </div>
@@ -69,21 +113,21 @@ const Cages = () => {
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div />
                                     </div>
@@ -96,7 +140,7 @@ const Cages = () => {
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         
                                         <div />
@@ -110,21 +154,21 @@ const Cages = () => {
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div />
                                     </div>
@@ -137,60 +181,60 @@ const Cages = () => {
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div class="cageRows">
                                             <div>Green Opline</div>
                                             <div>143</div>
                                             <div>ZBF1662223</div>
                                             <div>Male</div>
-                                            <div>5</div>       
+                                            <div>124123</div>     
                                         </div>
                                         <div />
                                     </div>
-                                </div>
+                                </div> */}
 
                             </div>
                         </div>

@@ -3,10 +3,11 @@ const express = require('express');
 const app = express();
 const pairRoutes = express.Router();
 
-let pair = require('./pair.model');
+let pairModel = require('./pair.model');
+var ObjectId = require('mongodb').ObjectID;
 
 pairRoutes.route('/').get(function(req, res) {
-    pair.find(function(err, pair) {
+    pairModel.find(function(err, pair) {
         if (err) {
             console.log(err);
         } else {
@@ -17,11 +18,20 @@ pairRoutes.route('/').get(function(req, res) {
 
 pairRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
-    pair.findById(id, function(err, pair) {
+    pairModel.findById(id, function(err, pair) {
         res.json(pair);
     });
 });
-
+pairRoutes.route('/delete/:id').delete(function(req, res) {
+    let id = req.params.id;
+    pairModel.findByIdAndRemove(id, function(err, pair) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(pair);
+        }
+    });
+});
 pairRoutes.route('/update/:id').post(function(req, res) {
     pair.findById(req.params.id, function(err, pair) {
         if (!pair)
@@ -44,10 +54,10 @@ pairRoutes.route('/update/:id').post(function(req, res) {
 });
 
 pairRoutes.route('/add').post(function(req, res) {
-    let pair = new pair(req.body);
+    let pair = new pairModel(req.body);
     pair.save()
         .then(pair => {
-            res.status(200).json({'pair': 'pair bird added successfully'});
+            res.status(200).json({'pair': pair});
         })
         .catch(err => {
             res.status(400).send('adding pair bird failed');

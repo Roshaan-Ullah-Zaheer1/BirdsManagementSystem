@@ -3,13 +3,19 @@ const Schema = mongoose.Schema;
 
 let farmbreed = new Schema({
     fatherId: {
-        type: Number
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'bird'
     },
     motherId: {
-        type: Number
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'bird'
     },
     hatchDate: {
         type: String
+    },
+    bird:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'bird'
     }
 });
 

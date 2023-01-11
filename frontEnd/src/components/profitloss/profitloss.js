@@ -6,6 +6,84 @@ const ProfitLoss = () => {
         <section className="content">
             <div className="container-fluid">
                 <div className="row">
+                    <div className="col-md-12 card ">
+                        <div className="card-header">
+                            <h3 className="card-title">Profit/Loss Statements</h3>
+                        </div>
+                        {/* <div className="col-12 table-responsive">
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Qty</th>
+                                        <th>Product</th>
+                                        <th>Serial #</th>
+                                        <th>Description</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Call of Duty</td>
+                                        <td>455-981-221</td>
+                                        <td>El snort testosterone trophy driving gloves handsome</td>
+                                        <td>$64.50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Need for Speed IV</td>
+                                        <td>247-925-726</td>
+                                        <td>Wes Anderson umami biodiesel</td>
+                                        <td>$50.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Monsters DVD</td>
+                                        <td>735-845-642</td>
+                                        <td>Terry Richardson helvetica tousled street art master</td>
+                                        <td>$10.70</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Grown Ups Blue Ray</td>
+                                        <td>422-568-642</td>
+                                        <td>Tousled lomo letterpress</td>
+                                        <td>$25.99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> */}
+                    </div>
+                    <div className="col-12 table responsive">
+                        <table className="table table-striped">
+                            <div className="table-responsive">
+                                <table className="table">
+                                    <tr>
+                                        <th style={{ "width": "50%" }}>Total Investment:</th>
+                                        <td>Rs.4500000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Expenses:</th>
+                                        <td>Rs.300500</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total Sold Birds:</th>
+                                        <td>Rs.5500000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>TotalPurchased Birds:</th>
+                                        <td>Rs.1000000</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Profit/Loss</th>
+                                        <td className= "profit">Rs.1200000</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </table>
+                    </div>
+                    {/* <div className="row">
                     <div className="col-12">
                         <div className="card">
                             <div className="card-header">
@@ -39,7 +117,7 @@ const ProfitLoss = () => {
                                                     </Link>
                                                     <div><i className="fas fa-trash customDel"></i></div>
                                                     <Link to="/birds/view">
-                                                        <div><i class='fas fa-book customView'></i></div>
+                                                        <div><i className='fas fa-book customView'></i></div>
                                                     </Link>
                                                 </div>
                                             </td>
@@ -57,7 +135,7 @@ const ProfitLoss = () => {
                                                     </Link>
                                                     <div><i className="fas fa-trash customDel"></i></div>
                                                     <Link to="/birds/view">
-                                                        <div><i class='fas fa-book customView'></i></div>
+                                                        <div><i className='fas fa-book customView'></i></div>
                                                     </Link>
                                                 </div>
                                             </td>
@@ -75,7 +153,7 @@ const ProfitLoss = () => {
                                                     </Link>
                                                     <div><i className="fas fa-trash customDel"></i></div>
                                                     <Link to="/birds/view">
-                                                        <div><i class='fas fa-book customView'></i></div>
+                                                        <div><i className='fas fa-book customView'></i></div>
                                                     </Link>
                                                 </div>
                                             </td>
@@ -85,6 +163,7 @@ const ProfitLoss = () => {
                             </div>
                         </div>
                     </div>
+                </div> */}
                 </div>
             </div>
         </section>

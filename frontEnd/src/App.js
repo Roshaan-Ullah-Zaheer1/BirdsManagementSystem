@@ -1,7 +1,5 @@
 import React, { Component,useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import CreateTodo from "./components/create-todo.component";
-
 import Login from "./components/login/login";
 
 import AllBirds from "./components/bird/AllBirds";
@@ -15,6 +13,11 @@ import EditPair from "./components/pair/EditPair";
 import ViewPair from "./components/pair/ViewPair";
 
 import Cages from "./components/cages/cage";
+
+import Daybook from "./components/daybook/daybook";
+import DaybookAdd from "./components/daybook/daybookadd";
+import DaybookEdit from "./components/daybook/daybookedit";
+import DaybookView from "./components/daybook/daybookview";
 
 import SoldBird from "./components/sales/sales";
 import AddSold from "./components/sales/salesadd";
@@ -31,65 +34,60 @@ import ViewChicks from "./components/chicks/viewchicks";
 
 import ProfitLoss from "./components/profitloss/profitloss";
 
+import Genetic from "./components/genetic/genetic";
+
 
 import cssFilesLoader from "./CssFilesLoader"
 import logo from "./logo.png";
 import "./App.css";
-import Navigation from "./components/layout/Navigation";
+
 import Dashboard from "./components/dashboard/Dashboard";
 
+import Layout from "./components/layout/Layout";
 const App =()=>{
-  const [toggle, setToggle ] = useState(false);
-   // handleToggle = this.handleToggle.bind(this);
-
-
-  const handleToggle=()=>{
-    setToggle(!toggle);
-  }
-
     return (
       <Router>
         <cssFilesLoader>
-        <div className={toggle === true ? 'hold-transition sidebar-mini sidebar-collapse' :
-        'hold-transition sidebar-mini'}>
-            <div className="wrapper">
-              <Navigation toggleHandler={handleToggle}/>
-              <Routes>
-
-                <Route path="/" element={<Dashboard />} />
-           
+              <Routes> 
                 <Route path="/login" element={<Login />} />
-
-                <Route path="/birds" element={<AllBirds/>} />
-                <Route path="/birds/create" element={<CreateBird/>} />
-                <Route path="/birds/edit" element={<EditBird/>} />
-                <Route path="/birds/view" element={<ViewBird />} />
+                <Route path="/" element={<Layout><Dashboard /></Layout>} />
+                <Route path="/birds" element={<Layout><AllBirds/></Layout>} />
+                <Route path="/birds/create" element={<Layout><CreateBird/></Layout>} />
+                <Route path="/birds/edit:id" element={<Layout><EditBird/></Layout>} />
+                <Route path="/birds/view:id" element={<Layout><ViewBird /></Layout>} />
                 
-                <Route path="/pairs" element={<AllPair/>}/>
-                <Route path="/add/pair" element={<AddPair/>}/>
-                <Route path="/pair/edit" element={<EditPair/>}/>
-                <Route path="/pair/view" element={<ViewPair/>} />
+                <Route path="/pairs" element={<Layout><AllPair/></Layout>}/>
+                <Route path="/pair/add" element={<Layout><AddPair/></Layout>}/>
+                <Route path="/pair/edit:id" element={<Layout><EditPair/></Layout>}/>
+                <Route path="/pair/view:id" element={<Layout><ViewPair/></Layout>} />
 
-                <Route path="/cages" element={<Cages/>} />
+                <Route path="/cages" element={<Layout><Cages/></Layout>} />
 
-                <Route path="/sales" element={<SoldBird/>} />
-                <Route path="/sold/add" element={<AddSold/>} />
-                <Route path="/sold/edit" element={<EditSold/>} />
-                <Route path="/sold/view" element={<ViewSold/>} />
+                <Route path="/daybook" element={<Layout><Daybook/></Layout>} />
+                <Route path="/daybook/add" element={<Layout><DaybookAdd/></Layout>} />
+                <Route path="/daybook/edit:id" element={<Layout><DaybookEdit/></Layout>} />
+                <Route path="/daybook/view:id" element={<Layout><DaybookView/></Layout>} />
 
-                <Route path="/purchases" element={<PurchaseBird/>} />
-                <Route path="/purchases/add" element={<AddPurchase/>} />
-                <Route path="/purchases/edit" element={<EditPurchase/>} />
-                <Route path="/purchases/view" element={<ViewPurchase/>} />
+                <Route path="/sales" element={<Layout><SoldBird/></Layout>} />
+                <Route path="/sales/add" element={<Layout><AddSold/></Layout>} />
+                <Route path="/sales/edit:id" element={<Layout><EditSold/></Layout>} />
+                <Route path="/sales/view:id" element={<Layout><ViewSold/></Layout>} />
 
-                <Route path="/chicks" element={<ChicksPedigree/>} />
-                <Route path="/view/chicks" element={<ViewChicks/>} />
+                <Route path="/purchases" element={<Layout><PurchaseBird/></Layout>} />
+                <Route path="/purchases/add" element={<Layout><AddPurchase/></Layout>} />
+                <Route path="/purchases/edit:id" element={<Layout><EditPurchase/></Layout>} />
+                <Route path="/purchases/view:id" element={<Layout><ViewPurchase/></Layout>} />
 
-                <Route path="/profitloss" element={<ProfitLoss/>} />
+                <Route path="/chicks" element={<Layout><ChicksPedigree/></Layout>} />
+                <Route path="/chicks/view:id" element={<Layout><ViewChicks/></Layout>} />
+
+                <Route path="/profitloss" element={<Layout><ProfitLoss/></Layout>} />
+
+                <Route path="/genetic" element={<Layout><Genetic/></Layout>} />
+
+                <Route path="/genetic" element={<Layout><Dashboard/></Layout>} />
               
               </Routes>
-            </div>
-          </div>
         </cssFilesLoader>
       </Router>
     );

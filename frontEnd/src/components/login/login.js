@@ -1,67 +1,76 @@
-import MiddleWrapper from "../layout/MiddleWrapper";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import bird from "./bird.jpg";
+import {useState, useEffect} from "react";
 const Login = () => {
-    return (<MiddleWrapper heading={""}>
-        <section className="content">
-            <div class="login-box">
-            <div class="card card-outline card-primary">
-                <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
-                </div>
-                <div class="card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="../../index3.html" method="post">
-                    <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Email"/>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword]= useState("");
+
+    useEffect(()=>{
+        const userToken = localStorage.getItem('user-token');
+        console.log(userToken);
+        if (userToken !== null) {
+            return navigate('/');
+        }    
+    },[]);
+
+    const loginHandler=(e)=>{
+        e.preventDefault();
+        if(email != "" && password != "") {
+            localStorage.setItem('user-token','true');
+            navigate("/");
+        }
+    }
+
+    const updateEmail=(e)=>{
+        setEmail(e.target.value);
+    }
+
+    const updatePassword=(e)=>{
+        setPassword(e.target.value);
+    }
+    
+    return (
+        <section className="content">
+            <div className="login-page"  style={{ backgroundImage:`url(${bird})`, backgroundSize: "100%"}}>
+            <div className="login-box">
+            <div className="card card-outline card-primary">
+                <div className="card-header text-center">
+                <a href="" className="h1"><b>ZABA BIRDS FARM</b></a>
+                </div>
+                <div className="card-body">
+                <p className="login-box-msg">Login Here</p>
+
+                <form onSubmit={loginHandler}>
+                    <div className="input-group mb-3">
+                    <input type="email" className="form-control" value={email} onChange={updateEmail} placeholder="Email"/>
+                    <div className="input-group-append">
+                        <div className="input-group-text">
+                        <span className="fas fa-envelope"></span>
                         </div>
                     </div>
                     </div>
-                    <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Password"/>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                    <div className="input-group mb-3">
+                    <input type="password" className="form-control" placeholder="Password" onChange={updatePassword} value={password}/>
+                    <div className="input-group-append">
+                        <div className="input-group-text">
+                        <span className="fas fa-lock"></span>
                         </div>
                     </div>
                     </div>
-                    <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                        <input type="checkbox" id="remember"/>
-                        <label for="remember">
-                            Remember Me
-                        </label>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <div className="row">
+                    
+                    <div className="col-12">
+                        <button type="submit" className="btn btn-primary btn-block">Sign In</button>
                     </div>
                     </div>
                 </form>
 
-                <div class="social-auth-links text-center mt-2 mb-3">
-                    <a href="#" class="btn btn-block btn-primary">
-                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                    </a>
-                </div>
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
-                <p class="mb-0">
-                    <a href="register.html" class="text-center">Register a new membership</a>
-                </p>
                 </div>
             </div>
-            </div>
-        </section>
-    </MiddleWrapper>);
+            </div></div>
+        </section>);
 }
 
 export default Login;

@@ -13,12 +13,14 @@ var purchasedRoutes = require('./purchasedRoutes');
 var farmbreedRoutes = require('./farmbreedRoutes');
 var pairRoutes = require('./pairRoutes');
 var saleRoutes = require('./saleRoutes');
+var daybookRoutes = require('./daybookRoutes');
 
 app.use('/bird', birdRoutes);
 app.use('/purchased', purchasedRoutes);
 app.use('/farmbreed', farmbreedRoutes);
 app.use('/pair', pairRoutes);
 app.use('/sale', saleRoutes);
+app.use('/daybook', daybookRoutes);
 
 mongoose.connect('mongodb://127.0.0.1:27017/birdDB', { useNewUrlParser: true });
 const connection = mongoose.connection;
